@@ -538,3 +538,97 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+/*SELECT * 
+FROM producto 
+WHERE precio= (SELECT MAX(precio) FROM producto) MAXIMO PRECIO DE UN PRODUCTO
+
+SELECT * 
+FROM producto 
+WHERE precio= (SELECT MIN(precio) FROM producto) MINIMO PRECIO DE UN PRODUCTO*
+
+SELECT * 
+FROM pedido
+WHERE cantidad = (SELECT MIN(cantidad) FROM pedido) MUESTRA LA CANTIDAD MAXIMA DE UN PEDIDO
+
+SELECT * 
+FROM pedido
+WHERE cantidad = (SELECT MAX(cantidad) FROM pedido) MUESTRA LA CANTIDAD MINIMA DE UN PEDIDO
+
+/Obtener el número de pedidos realizados en una fecha específica:
+SELECT COUNT(*) as cantidad_pedidos FROM pedido WHERE fecha_pedido = '2023-05-07';
+
+//Obtener el promedio de sueldo de los empleados:
+SELECT AVG(sueldo) as promedio_sueldo FROM empleado;
+
+//Obtener el nombre del empleado y su sueldo que tiene un sueldo mayor al promedio de sueldos de todos los empleados:
+SELECT nombre, sueldo FROM empleado WHERE sueldo > (SELECT AVG(sueldo) FROM empleado);
+
+//Buscar todos los pedidos que incluyen un producto específico:
+SELECT * FROM pedido WHERE id_producto = '5';
+
+//  recupera todos los productos cuyo precio es mayor o igual a 2.5 y luego los agrupa por el valor de "precio".
+SELECT * FROM producto WHERE precio >= 2.5 GROUP BY precio;
+
+//Buscar todas las rutas realizadas por un conductor con la id "5"
+SELECT * FROM ruta WHERE id_conductor = 5;
+
+//Buscar todos los empleados que iniciaron en una fecha específica
+SELECT * FROM empleado WHERE fecha_inicio = '2020-01-04';
+
+BUSQUEDAS POR JOINS 
+
+//sirve para ptener informacion relacionada entre entre clientes y pedidos 
+SELECT *
+FROM cliente_pedido
+LEFT JOIN clientes ON cliente_pedido.id_cliente = clientes.id_cliente
+LEFT JOIN pedido ON cliente_pedido.id_pedido = pedido.id_pedido;
+
+//CONSULTA LOS CLIENTES QUE NO TENGAN PEDIDO
+
+SELECT *
+FROM clientes
+LEFT JOIN cliente_pedido
+ON clientes.id_cliente = cliente_pedido.id_cliente
+WHERE cliente_pedido.id_cliente IS NULL;
+
+//todos los clientes asi no tengan pedido
+SELECT *
+FROM clientes
+LEFT JOIN cliente_pedido
+ON clientes.id_cliente = cliente_pedido.id_cliente_pedido;
+
+//los camiones sin ruta establecida 
+
+SELECT *
+FROM camion
+LEFT JOIN ruta
+ON camion.id_camion = ruta.id_camion
+WHERE ruta.id_camion IS NULL;
+
+//todos los camiones sin importar si tienen ruta
+SELECT *
+FROM camion
+LEFT JOIN ruta
+ON camion.id_camion = ruta.id_ruta;
+
+//los camiones que tengan minimo una ruta
+SELECT * FROM camion
+INNER JOIN ruta
+ON camion.id_camion = ruta.id_ruta;
+
+//busca los precios mayores a 9 entre las tablas producto y precio
+SELECT p.id_producto, p.nombre, p.descripcion, pr.precio
+FROM producto p
+JOIN precio pr ON p.id_producto = pr.id_producto
+WHERE pr.precio>9;
+
+//buscar los precios menores a 7 
+SELECT * 
+FROM producto 
+INNER JOIN precio
+ON producto.id_producto = precio.id_producto
+WHERE precio.precio < 7
+
+/;
+

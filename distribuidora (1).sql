@@ -682,3 +682,28 @@ CREATE TABLE proveedor_producto (
   INDEX (proveedor_id),
   INDEX (producto_id)
 );
+-- Repetir el cambio para otras tablas que tengan claves externas
+
+CREATE TABLE registrando (
+  registro INT PRIMARY KEY AUTO_INCREMENT,
+  producto_id INT,
+  venta_id INT,
+  FOREIGN KEY (producto_id) REFERENCES producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (venta_id) REFERENCES pedido(id_pedido) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE asigna (
+  id_asigna INT PRIMARY KEY AUTO_INCREMENT,
+  empleado_id INT,
+  pedido_id INT,
+  FOREIGN KEY (empleado_id) REFERENCES empleado(id_empleado) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (pedido_id) REFERENCES pedido(id_pedido) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE camion_pedido (
+  id_horario INT PRIMARY KEY AUTO_INCREMENT,
+  placa VARCHAR(10),
+  pedido_id INT,
+  FOREIGN KEY (placa) REFERENCES camion(placa) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (pedido_id) REFERENCES pedido(id_pedido) ON DELETE CASCADE ON UPDATE CASCADE
+);

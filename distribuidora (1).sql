@@ -628,7 +628,17 @@ SELECT *
 FROM producto 
 INNER JOIN precio
 ON producto.id_producto = precio.id_producto
-WHERE precio.precio < 7
+WHERE precio.precio < 7*/;
 
-/;
+/*Utilizar nombres más descriptivos para las tablas y los campos: Los nombres de las tablas y los campos deben ser
+ descriptivos y representar claramente la información que almacenan. Esto facilitará la comprensión del esquema de la 
+ base de datos. Por ejemplo, en lugar de provee podríamos usar proveedor_producto, y en lugar de tiene podríamos usar 
+ camion_pedido*/
 
+ /*Utilizar claves autoincrementales: Para las tablas que tienen claves primarias que no requieren un valor específico, como "proveedor", "producto", "pedido" y "empleado", se puede utilizar el atributo AUTO_INCREMENT en las definiciones de las claves primarias. Esto permitirá que se generen automáticamente valores únicos para las claves primarias sin necesidad de especificarlos manualmente.*/
+
+CREATE TABLE proveedor (
+  id_proveedor INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50),
+  horario VARCHAR(50)
+);

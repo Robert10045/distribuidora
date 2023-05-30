@@ -642,3 +642,10 @@ CREATE TABLE proveedor (
   nombre VARCHAR(50),
   horario VARCHAR(50)
 );
+CREATE TABLE producto (
+  id_producto INT PRIMARY KEY AUTO_INCREMENT,
+  precio_compra DECIMAL(10,2),
+  categoria VARCHAR(255),
+  proveedor_id INT,
+  FOREIGN KEY (proveedor_id) REFERENCES proveedor(id_proveedor)
+);

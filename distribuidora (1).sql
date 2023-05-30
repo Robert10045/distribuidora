@@ -649,3 +649,36 @@ CREATE TABLE producto (
   proveedor_id INT,
   FOREIGN KEY (proveedor_id) REFERENCES proveedor(id_proveedor)
 );
+CREATE TABLE pedido (
+  id_pedido INT PRIMARY KEY AUTO_INCREMENT,
+  descripcion_producto VARCHAR(255),
+  fecha_venta DATE,
+  direccion VARCHAR(255),
+  precio DECIMAL(10,2)
+);
+
+CREATE TABLE empleado (
+  id_empleado INT PRIMARY KEY AUTO_INCREMENT,
+  conductor BOOLEAN,
+  vendedor BOOLEAN
+);
+
+CREATE TABLE camion (
+  placa VARCHAR(10) PRIMARY KEY,
+  tipo VARCHAR(255),
+  recorrido VARCHAR(255),
+  capacidad_peso DECIMAL(10,2)
+);
+/* Considerar el uso de tipos de datos más apropiados: Asegúrate de utilizar los tipos de datos más adecuados para    cada campo. Por ejemplo, en lugar de utilizar VARCHAR(255) para campos como "nombre" y "horario", podrías utilizar tipos de datos más específicos, como VARCHAR(50) si sabes que el campo nunca excederá los 50 caracteres.
+
+Agregar restricciones de integridad referencial ON DELETE y ON UPDATE: Puedes especificar qué hacer cuando se elimina o actualiza una fila en una tabla relacionada utilizando las cláusulas ON DELETE y ON UPDATE en las restricciones de clave externa (FOREIGN KEY). Esto asegurará la integridad referencial y definirá acciones claras cuando se realicen cambios en los datos relacionados.*/
+
+CREATE TABLE proveedor_producto (
+  cod_provee INT PRIMARY KEY AUTO_INCREMENT,
+  proveedor_id INT,
+  producto_id INT,
+  FOREIGN KEY (proveedor_id) REFERENCES proveedor(id_proveedor) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (producto_id) REFERENCES producto(id_producto) ON DELETE CASCADE ON UPDATE CASCADE,
+  INDEX (proveedor_id),
+  INDEX (producto_id)
+);
